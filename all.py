@@ -65,7 +65,7 @@ def mainMenu():
         if user_info["role"] == "admin":
             AdminMenuAfterLogin()
         elif user_info["role"] == "customer":
-            customer_menu_after_login("") # TODO
+            customer_menu_after_login(user_info) # TODO
         else :
             print(f"there is no user : {user_info["user"]}")
     else:
@@ -96,10 +96,9 @@ def AdminMenuAfterLogin():
             break
 
 # 3. Customer Menu After Login
-def customer_menu_after_login(user_id):
+def customer_menu_after_login(user_info):
     # for i in range(len(books)) :
-    index_no = [i for i in range(len(users)) if users[i]["id"] == user_id]
-    print(f"Welcome, {users[index_no]["username"]}!")
+    print(f"Welcome, {user_info["user"]}!")
     print(
         """\
 1. View Products
@@ -109,7 +108,13 @@ def customer_menu_after_login(user_id):
 5. Order History
 6. Logout"""
     )
-    return int(input("Enter your choice:"))
+    choice = int(input("Enter your choice:"))
+    if choice == 1:
+        productDisplay()
+    elif choice == 5:
+        orderHistoryDisplay()
+    else:
+        print("")
 
 # 4. Product Display (Using tabulate)
 
